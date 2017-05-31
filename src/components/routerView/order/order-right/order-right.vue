@@ -9,7 +9,7 @@
 				<el-form :inline="true" :model='search_data' class="demo-form-inline">
 					<el-form-item>
 						<el-input placeholder="姓名"
-                              v-model='search_data.order_client'
+                              v-model='search_data.client_name'
                               clear></el-input>
 					</el-form-item>
 					<el-form-item>
@@ -46,13 +46,6 @@
                 :label="fields.client_name.info.label"
                 :align="fields.client_name.style.align"
                 :min-width="fields.client_name.style.width"></el-table-column>
-				<!-- <el-table-column
-                :prop="fields.client_sex.info.prop"
-                :label="fields.client_sex.info.label"
-                :align="fields.client_sex.style.align"
-                :width="fields.client_sex.style.width"
-                :filters="fields.client_sex.filter.list"
-                :filter-multiple="fields.client_sex.filter.multiple"></el-table-column> -->
 					<el-table-column
                 :prop="fields.order_num.info.prop"
                 :label="fields.order_num.info.label"
@@ -65,14 +58,6 @@
                 :min-width="fields.order_shop.style.width"
                 :filters="fields.order_shop.filter.list"
                 :filter-multiple="fields.order_shop.filter.multiple"></el-table-column>
-<!-- 					<el-table-column
-                :prop="fields.order_type.info.prop"
-                :label="fields.order_type.info.label"
-                :align="fields.order_type.style.align"
-                :width="fields.order_type.style.width"
-                :filters="fields.order_type.filter.list"
-                :filter-multiple="fields.order_type.filter.multiple"
-                ></el-table-column> -->
 					<el-table-column
                 :prop="fields.client_tel1.info.prop"
                 :label="fields.client_tel1.info.label"
@@ -231,46 +216,7 @@ import createOrder from '../../createPages/createOrder/createOrder.vue'
                 layout: "total, sizes, prev, pager, next, jumper"
             },
 
-            // 订单状态
-            format_status_list: {
-                1: '待维修',
-                2: '已维修',
-                3: '已发货',
-                4: '已成交',
-                5: '退单',
-                6: '其他'
-            },
-
             fields: {
-                // order_type: {
-                //     info: {
-                //         prop: 'order_type',
-                //         label: '类型',
-                //     },
-                //     filter: {
-                //         list: [{
-                //             text: '珠宝',
-                //             value: 1
-                //         }, {
-                //             text: '皮具',
-                //             value: 2
-                //         }, {
-                //             text: '包包',
-                //             value: 3
-                //         }, {
-                //             text: '定制',
-                //             value: 4
-                //         }, {
-                //             text: '其他',
-                //             value: 5
-                //         }],
-                //         multiple: false
-                //     },
-                //     style: {
-                //         width: '100',
-                //         align: 'center'
-                //     }
-                // },
                 client_sex: {
                     info: {
                         prop: 'client_sex',
@@ -364,22 +310,22 @@ import createOrder from '../../createPages/createOrder/createOrder.vue'
                     },
                     filter: {
                         list: [{
-                            text: '待维修',
+                            text: '收货',
                             value: 1
                         }, {
-                            text: '已维修',
+                            text: '待财务确认',
                             value: 2
                         }, {
-                            text: '已发货货',
+                            text: '待维修',
                             value: 3
                         }, {
-                            text: '已成交',
+                            text: '已维修',
                             value: 4
                         }, {
-                            text: '退单',
+                            text: '发货',
                             value: 5
                         }, {
-                            text: '其他',
+                            text: '退单',
                             value: 6
                         }],
                         multiple: false
@@ -482,19 +428,21 @@ import createOrder from '../../createPages/createOrder/createOrder.vue'
          * 修改用户
          * @param  {object} user 当前用户信息对象
          */
-        onEditOrder(user) {
+        onEditOrder(users) {
             this.dialogEdit.show = true;
-            user=this.$route.query;
-            console.log(user);
-            if (user && user.id) {
-                this.$router.push('/order?id=' + user.id);
-            } else {
-                this.$message({
-                    showClose: true,
-                    message: 'ID跑哪去了？',
-                    type: 'error'
-                });
-            }
+            this.dialogEdit.order_info = users;
+            console.log(users);
+            // user=this.$route.query;
+            // console.log(user);
+            // if (user && user.id) {
+            //     this.$router.push('/order?id=' + user.id);
+            // } else {
+            //     this.$message({
+            //         showClose: true,
+            //         message: 'ID跑哪去了？',
+            //         type: 'error'
+            //     });
+            // }
         },
 
    /**
@@ -553,6 +501,7 @@ import createOrder from '../../createPages/createOrder/createOrder.vue'
             var sd = {};
 
             var query = this.$route.query;
+            console.log(query);
             for (var p in query) {
                 sd[p] = query[p];
             }

@@ -1,23 +1,23 @@
 <template>
 <ul class="leftNav">
 	<li>
-		<router-link to="/home"> <i class="fa fa-home fa-lg"></i>
+		<router-link to="/index/home"> <i class="fa fa-home fa-lg"></i>
 			首页
 		</router-link>
 	</li>
 	<li>
-		<router-link to="/order"> <i class="fa fa-cart-plus fa-lg"></i>
+		<router-link to="/index/order"> <i class="fa fa-cart-plus fa-lg"></i>
 			订单管理
 		</router-link>
 	</li>
 	<li>
-		<router-link to="/shop">
+		<router-link to="/index/shop">
 			<i class="fa fa-building" fa-lg></i>
 			门店管理
 		</router-link>
 	</li>
 	<li>
-		<router-link to="/user">
+		<router-link to="/index/user">
 			<i class="fa fa-user fa-lg"></i>
 			用户管理
 		</router-link>

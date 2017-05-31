@@ -157,7 +157,7 @@ data() {
             }
             this.$refs[ref].validate((valid) => {
                 if (valid) {
-                  this.$router.push('/home')
+                  this.$router.push('/index')
 }
             });
         },

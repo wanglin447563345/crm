@@ -1,44 +1,45 @@
 /**
  * 路由Map
  */
-import home from '../components/routerView/home/home.vue'
+import table from '../components/routerView/home/home.vue'
 import user from '../components/routerView/user/user.vue'
 import order from '../components/routerView/order/order.vue'
 import shop from '../components/routerView/shop/shop.vue'
 import login from '../components/login/login.vue'
+import index from '../components/index.vue'
+// import home_routes from './home.js'
 
 // 定义路由
-
-const routes = [
-  { 
-    path    : '/',
+const routes = [{
+  path    : '/',
   redirect: to => {
     return 'login';
-  }
+  },
+  hidden  : true
 }, {
   path     : '/login',
-  component: login
-}, 
-{ 
-  	path: '/home',
-    component: home,
-     meta: { requiresAuth: true }
+  component: login,
+  hidden   : true
+}, {
+  path     : '/index',
+  component: index,
+  hidden   : true,
+  redirect: to => {
+    return '/index/home';
   },
-  { 
-  	path: '/order',
-  	component: order,
-    meta: { requiresAuth: true }
-  },
-  { 
-  	path: '/user',
-  	component: user,
-    meta: { requiresAuth: true }
-  },
-    { 
-    path: '/shop',
-    component: shop,
-    meta: { requiresAuth: true }
-  }
-]
+  children : [{
+    path     : 'home',
+    component: table
+  },{
+    path     : 'order',
+    component: order
+  },{
+    path     : 'shop',
+    component: shop
+  },{
+    path     : 'user',
+    component: user
+  }]
+}]
 
 export default routes
